@@ -5,13 +5,12 @@ import { useForm } from "react-hook-form";
 import { userSchema, UserSchema } from "../lib/zod";
 import { userCreate } from "../lib/action";
 
-
 export default function Form() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSchema>({
+  } = useForm({
     resolver: zodResolver(userSchema),
   });
 
@@ -72,16 +71,16 @@ export default function Form() {
         )}
         <label>Sex</label>
         <select
-          {...register("gender")}
-
+          {...register("sex")}
           defaultValue=""
           className="ring-1 rounded p-2"
         >
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-</select>
-        {errors.gender && (
-          <span className="text-red-500">{errors.gender.message}</span>
+          <option value="">Select gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+        {errors.sex && (
+          <span className="text-red-500">{errors.sex.message}</span>
         )}
         <label>Phone</label>
         <input
@@ -103,15 +102,12 @@ export default function Form() {
         {errors.address && (
           <span className="text-red-500">{errors.address.message}</span>
         )}
-        {/* <label>Birthday</label>
+        <label>Birthday</label>
         <input
           {...register("birthday")}
           type="date"
           className="ring-1 rounded p-2"
         />
-        {errors.birthday && (
-          <span className="text-red-500">{errors.birthday.message}</span>
-        )} */}
         <button
           type="submit"
           className="bg-green-800 text-white p-2 rounded w-full hover:bg-green-400 transition duration-300 ease-in-out"
