@@ -28,3 +28,4 @@ export const columns: ColumnDef<User>[] = [
   {accessorKey: "birthday", header: "birthday"},
 ];
 
+ 

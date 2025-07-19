@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { userSchema, UserSchema } from "../lib/zod";
 import { userCreate } from "../lib/action";
+import { toast } from "sonner"; 
 
 export default function Form() {
   const {
@@ -14,11 +15,17 @@ export default function Form() {
     resolver: zodResolver(userSchema),
   });
 
-  const onSubmit = async (data: UserSchema) => {
+   const onSubmit = async (data: UserSchema) => {
     try {
       await userCreate(data);
+      toast("✅ Event has been created.", {
+        className: "text-green-600",
+      });
     } catch (error) {
-      alert(error);
+      toast.error("❌ Failed to create event.", {
+        className: "bg-red-600 text-white",
+      });
+      console.error(error);
     }
   };
 
